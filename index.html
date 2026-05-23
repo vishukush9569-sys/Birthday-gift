@@ -1,0 +1,301 @@
+<!-- Save this as index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Anshul ❤️</title>
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      overflow:hidden;
+      background:#050816;
+      color:white;
+    }
+
+    #root{
+      width:100vw;
+      height:100vh;
+    }
+
+    .container{
+      position:relative;
+      width:100%;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      background:linear-gradient(135deg,#0f172a,#1e1b4b,#4c1d95);
+    }
+
+    /* Animated Gradient */
+    .container::before{
+      content:'';
+      position:absolute;
+      width:200%;
+      height:200%;
+      background:radial-gradient(circle,#ff0080 0%,transparent 40%);
+      animation:moveGlow 8s linear infinite;
+      opacity:0.5;
+    }
+
+    @keyframes moveGlow{
+      0%{
+        transform:translate(-20%,-20%);
+      }
+      50%{
+        transform:translate(20%,20%);
+      }
+      100%{
+        transform:translate(-20%,-20%);
+      }
+    }
+
+    /* Floating Hearts */
+    .heart{
+      position:absolute;
+      color:#ff4d88;
+      font-size:22px;
+      animation:float 8s linear infinite;
+      opacity:0.8;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(100vh) scale(0.5);
+        opacity:0;
+      }
+      50%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-10vh) scale(1.4);
+        opacity:0;
+      }
+    }
+
+    .card{
+      position:relative;
+      z-index:10;
+      width:90%;
+      max-width:750px;
+      padding:50px;
+      border-radius:30px;
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(15px);
+      border:1px solid rgba(255,255,255,0.15);
+      text-align:center;
+      box-shadow:0 0 40px rgba(255,0,128,0.4);
+      animation:fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .title{
+      font-size:3.5rem;
+      font-weight:700;
+      background:linear-gradient(to right,#ff4d88,#ffb6d9);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+      animation:pulse 2s infinite;
+    }
+
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.04);}
+      100%{transform:scale(1);}
+    }
+
+    .subtitle{
+      font-size:1.3rem;
+      margin-bottom:25px;
+      color:#f5d0fe;
+    }
+
+    .message{
+      font-size:1.1rem;
+      line-height:1.9;
+      color:#f8fafc;
+      margin-top:20px;
+    }
+
+    .love{
+      margin-top:30px;
+      font-size:2rem;
+      color:#ff4d88;
+      animation:heartbeat 1.3s infinite;
+    }
+
+    @keyframes heartbeat{
+      0%{transform:scale(1);}
+      25%{transform:scale(1.2);}
+      40%{transform:scale(1);}
+      60%{transform:scale(1.2);}
+      100%{transform:scale(1);}
+    }
+
+    .btn{
+      margin-top:35px;
+      padding:15px 35px;
+      border:none;
+      border-radius:50px;
+      background:linear-gradient(to right,#ff0080,#7928ca);
+      color:white;
+      font-size:1rem;
+      cursor:pointer;
+      transition:0.4s;
+      box-shadow:0 0 20px rgba(255,0,128,0.5);
+    }
+
+    .btn:hover{
+      transform:scale(1.08);
+      box-shadow:0 0 30px rgba(255,0,128,0.8);
+    }
+
+    .popup{
+      margin-top:25px;
+      font-size:1.2rem;
+      color:#ffe4f1;
+      animation:fadeIn 1s ease;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .title{
+        font-size:2.3rem;
+      }
+
+      .card{
+        padding:30px;
+      }
+
+      .message{
+        font-size:1rem;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function FloatingHearts(){
+  const hearts = Array.from({length:25});
+
+  return (
+    <>
+      {hearts.map((_,i)=>(
+        <div
+          key={i}
+          className="heart"
+          style={{
+            left: Math.random()*100 + "vw",
+            animationDuration:(5 + Math.random()*5)+"s",
+            fontSize:(15 + Math.random()*25)+"px",
+            animationDelay:(Math.random()*5)+"s"
+          }}
+        >
+          ❤️
+        </div>
+      ))}
+    </>
+  )
+}
+
+function App(){
+
+  const [showMessage,setShowMessage] = React.useState(false);
+
+  return(
+    <div className="container">
+
+      <FloatingHearts/>
+
+      <div className="card">
+
+        <h1 className="title">
+          Happy Birthday Anshul ❤️
+        </h1>
+
+        <p className="subtitle">
+          My Love, My Happiness, My Forever ✨
+        </p>
+
+        <div className="message">
+          Dear Anshul,<br/><br/>
+
+          On your special day, I just want to remind you how deeply
+          I love you. You are the most beautiful part of my life,
+          the reason behind my smiles, and the peace in my heart.
+          Every moment with you feels magical, like a dream I never
+          want to end.<br/><br/>
+
+          I promise to stand beside you, support you, and love you
+          endlessly no matter what happens. You are not just my lover,
+          you are my world. ❤️<br/><br/>
+
+          May your birthday be filled with happiness, laughter,
+          love, and all the beautiful things you deserve.
+        </div>
+
+        <div className="love">
+          I LOVE YOU SO MUCH 💖
+        </div>
+
+        <button
+          className="btn"
+          onClick={()=>setShowMessage(true)}
+        >
+          Click For Surprise 🎁
+        </button>
+
+        {
+          showMessage &&
+          <div className="popup">
+            ✨ You are the best thing that ever happened to me ✨
+          </div>
+        }
+
+      </div>
+
+    </div>
+  )
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>)
+
+</script>
+
+</body>
+</html>
